@@ -2,56 +2,162 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="./resources/bootstrap-4.0.0-beta.2-dist/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="./resources/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Your Website</title>
+    <title>uc-davies-mib</title>
 </head>
 
-<body ng-app="app" ng-controller="controleCtrl">
-    <header>
-        <nav>
-            <ul>
-                <li>Your menu</li>
-            </ul>
-        </nav>
-    </header>
+<body ng-app="app" ng-controller="controller">
     <section>
-        <article>
-            <header>
-                <h2>Article title</h2>
-                <p>Posted on
-                    <time datetime="2009-09-04T16:31:24+02:00">September 4th 2009</time> by
-                    <a href="#">Writer</a> -
-                    <a href="#comments">6 comments</a>
-                </p>
-            </header>
-            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-        </article>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mtop-10 text-center">
+                    <h1>MIB UC Davis</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 mtop-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">Endereço IP: </span>
+                                <input ng-model="ip" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <h5 class="mtop-20">Sobre o que você deseja saber? </h5>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">CPU</label>
+                                        <select multiple="" class="form-control" ng-model="cpuSelectedOptions">
+                                            <option>Trocas de contexto(contador)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Memória</label>
+                                        <select multiple="" class="form-control" ng-model="memoriaSelectedOptions">
+                                            <option>Total de RAM</option>
+                                            <option>Total de RAM usada</option>
+                                            <option>Total de RAM disponível</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Processos</label>
+                                        <select multiple="" class="form-control" ng-model="taskSelectedOptions">
+                                            <option>Tabela de processos</option>
+                                            <option>Quantidade de processos</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">Disco</label>
+                                        <select multiple="" class="form-control" ng-model="diskSelectedOptions">
+                                            <option>Espaço livre</option>
+                                            <option>Espaço usado</option>
+                                            <option>Porcentagem de inodes usados</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 text-right">
+                                    <button type="button" style="width: 25%" class="btn btn-secondary" ng-click="getUsedRam();">
+                                        Buscar
+                                    </button>
+                                    <button type="button" style="width: 25%" class="btn btn-secondary">
+                                        Limpar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
-        <article>
-            <header>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Retorno:</h5>
+                        </div>
+                    </div>
+                    <div style="overflow: auto;height: 70vh">
+                        <ul class="list-group" >
+                            <li class="list-group-item " ng-repeat="value in retornoList">
+                                <b>[{{value.time}}]</b>{{value.content}}
+                            </li>
+                            <!-- <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li>
+                            <li class="list-group-item ">
+                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
+                            </li> -->
+                        </ul>
+                    </div>
 
-
-                <h2>Article title</h2>
-                <p>Posted on
-                    <time datetime="2009-09-04T16:31:24+02:00">September 4th 2009</time> by
-                    <a href="#">Writer</a> -
-                    <a href="#comments">6 comments</a>
-                </p>
-            </header>
-            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-        </article>
+                </div>
+            </div>
+        </div>
     </section>
-    <aside>
-        <h2>About section</h2>
-        <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-    </aside>
-    <footer>
-        <p>Copyright 2009 Your name</p>
-    </footer>
-    <script type="text/javascript" src="./bootstrap-4.0.0-beta.2-dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./resources/"></script>
-    <script type="text/javascript" src="./resources/angular.min.js"></script>
+    <script type="text/javascript" src="./resources/jQuery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="./resources/angular/angular.min.js"></script>
+    <script type="text/javascript" src="./resources/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./resources/moment.min.js"></script>
+    <script type="text/javascript" src="./resources/moment-with-locales.min.js"></script>
+
     <script type="text/javascript" src="./controller.js"></script>
 </body>
 

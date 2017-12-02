@@ -3,6 +3,9 @@ const express = require('express');
 
 // var snmp = require('snmp-native');
 const { memoryRouter } = require('./server/services/memory/router');
+const { diskRouter } = require('./server/services/disk/router');
+const { cpuRouter } = require('./server/services/cpu/router');
+const { tasksRouter } = require('./server/services/tasks/router');
 
 // var session = new snmp.Session();
 var session = new snmp.Session({ host: 'localhost', community: 'public' });
@@ -20,10 +23,12 @@ session.get({ oid: [1,3,6,1,4,1,2021,4,11,0] }, function (error, varbinds) {
 
 var app = express();
 
-app.use(express.static(__dirname + '/public'));
-
+app.use('/', express.static(__dirname + '/public'));
 
 app.use('/memory', memoryRouter);
+app.use('/disk', diskRouter);
+app.use('/cpu', cpuRouter);
+app.use('/tasks', tasksRouter);
 
 
 app.listen(3000, () => {
