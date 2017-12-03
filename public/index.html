@@ -11,7 +11,7 @@
     <title>uc-davies-mib</title>
 </head>
 
-<body ng-app="app" ng-controller="controller">
+<body ng-app="app" ng-controller="controller" ng-init="init();">
     <section>
         <div class="container">
             <div class="row">
@@ -44,10 +44,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Memória</label>
-                                        <select multiple="" class="form-control" ng-model="memoriaSelectedOptions">
-                                            <option>Total de RAM</option>
-                                            <option>Total de RAM usada</option>
-                                            <option>Total de RAM disponível</option>
+                                        <select multiple="" class="form-control" ng-model="memorySelectedOptions">
+                                            <option ng-repeat="value in memoryOptions" value="{{$index}}" >{{value.label}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -64,17 +62,15 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Disco</label>
                                         <select multiple="" class="form-control" ng-model="diskSelectedOptions">
-                                            <option>Espaço livre</option>
-                                            <option>Espaço usado</option>
-                                            <option>Porcentagem de inodes usados</option>
+                                            <option ng-repeat="value in diskOptions" value="{{$index}}" >{{value.label}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-right">
-                                    <button type="button" style="width: 25%" class="btn btn-secondary" ng-click="getUsedRam();">
+                                    <button type="button" style="width: 25%" class="btn btn-secondary" ng-click="searchMibs();">
                                         Buscar
                                     </button>
-                                    <button type="button" style="width: 25%" class="btn btn-secondary">
+                                    <button type="button" style="width: 25%" class="btn btn-secondary" ng-click="limparRetornos();">
                                         Limpar
                                     </button>
                                 </div>
@@ -91,60 +87,9 @@
                     </div>
                     <div style="overflow: auto;height: 70vh">
                         <ul class="list-group" >
-                            <li class="list-group-item " ng-repeat="value in retornoList">
+                            <li class="list-group-item " ng-repeat="value in retornoList | orderBy:'time':true">
                                 <b>[{{value.time}}]</b>{{value.content}}
                             </li>
-                            <!-- <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li>
-                            <li class="list-group-item ">
-                                <b>[06:56:31]</b>Total de RAM: 18459234 KB
-                            </li> -->
                         </ul>
                     </div>
 

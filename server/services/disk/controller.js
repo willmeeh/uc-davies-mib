@@ -1,6 +1,4 @@
 var snmp = require('snmp-native');
-var snmp2 = require ("net-snmp");
-
 
 const getUsage = (req, res) => {
 
