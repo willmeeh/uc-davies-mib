@@ -33,7 +33,10 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
             label: 'Espaço usado',
             fn: $scope.pushUsedDisk
         }, {
-            label: 'Porcentagem de inodes usados',
+            label: 'Espaço total',
+            fn: $scope.pusTotalDisk
+        }, {
+            label: 'Porcentagem de inodes utilizado',
             fn: $scope.pushInodesDisk
         }];
     }
@@ -50,11 +53,16 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
     $scope.pushFreeDisk = function () {
         $http({
             method: 'GET',
-            url: baseUrl + '/memory/getUsage/' + $scope.ip
+            url: baseUrl + '/disk/getFree/' + $scope.ip
         }).then(function (retorno) {
+            var espacoLivre = 0;
+            angular.forEach(retorno.data, function(retornoOid) {
+                espacoLivre += retornoOid.value;
+            });
+
             $scope.retornoList.push({
                 time: moment().format('LTS'),
-                content: ' Total de RAM usada: ' + $scope.bytesToSize(retorno.data.value * 1024)
+                content: ' Espaço livre: ' + $scope.bytesToSize(espacoLivre * 1024)
             })
         }, function (erro) {
         });
@@ -63,11 +71,32 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
     $scope.pushUsedDisk = function () {
         $http({
             method: 'GET',
-            url: baseUrl + '/memory/getUsage/' + $scope.ip
+            url: baseUrl + '/disk/getUsage/' + $scope.ip
         }).then(function (retorno) {
+            var espacoUsado = 0;
+            angular.forEach(retorno.data, function(retornoOid) {
+                espacoUsado += retornoOid.value;
+            });
             $scope.retornoList.push({
                 time: moment().format('LTS'),
-                content: ' Total de RAM usada: ' + $scope.bytesToSize(retorno.data.value * 1024)
+                content: ' Espaço usado: ' + $scope.bytesToSize(espacoUsado * 1024)
+            })
+        }, function (erro) {
+        });
+    }
+
+    $scope.pusTotalDisk = function () {
+        $http({
+            method: 'GET',
+            url: baseUrl + '/disk/getTotal/' + $scope.ip
+        }).then(function (retorno) {
+            var espacoTotal = 0;
+            angular.forEach(retorno.data, function(retornoOid) {
+                espacoTotal += retornoOid.value;
+            });
+            $scope.retornoList.push({
+                time: moment().format('LTS'),
+                content: ' Espaço total: ' + $scope.bytesToSize(espacoTotal * 1024)
             })
         }, function (erro) {
         });
@@ -76,11 +105,11 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
     $scope.pushInodesDisk = function () {
         $http({
             method: 'GET',
-            url: baseUrl + '/memory/getUsage/' + $scope.ip
+            url: baseUrl + '/disk/getInodesUsedPercent/' + $scope.ip
         }).then(function (retorno) {
             $scope.retornoList.push({
                 time: moment().format('LTS'),
-                content: ' Total de RAM usada: ' + $scope.bytesToSize(retorno.data.value * 1024)
+                content: ' Porcentagem de inodes utilizado: ' + retorno.data.value + "%"
             })
         }, function (erro) {
         });

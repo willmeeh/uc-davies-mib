@@ -6,7 +6,7 @@ const getUsage = (req, res) => {
     var session = new snmp.Session({ host: ip, community: 'public' });
     session.get({ oid: [1, 3, 6, 1, 4, 1, 2021, 4, 6, 0] }, function (error, varbinds) {
         if (error) {
-            res.send('Erro ao obter memoria utilizada');
+            res.send(error);
         } else {
             res.send(varbinds[0]);
         }
@@ -19,7 +19,7 @@ const getTotal = (req, res) => {
     var session = new snmp.Session({ host: ip, community: 'public' });
     session.get({ oid: [1, 3, 6, 1, 4, 1, 2021, 4, 5, 0] }, function (error, varbinds) {
         if (error) {
-            res.send('Erro ao obter memoria utilizada');
+            res.send(error);
         } else {
             res.send(varbinds[0]);
         }
@@ -32,7 +32,7 @@ const getFree = (req, res) => {
     var session = new snmp.Session({ host: ip, community: 'public' });
     session.get({ oid: [1, 3, 6, 1, 4, 1, 2021, 4, 11, 0] }, function (error, varbinds) {
         if (error) {
-            res.send('Erro ao obter memoria utilizada');
+            res.send(error);
         } else {
             res.send(varbinds[0]);
         }
