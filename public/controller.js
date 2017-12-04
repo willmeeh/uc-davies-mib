@@ -187,7 +187,6 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
                     content: " Espaço total: Erro nenhuma resposta de  " + $scope.ip
                 });
             }
-
         }, function (erro) {
         });
     }
@@ -230,8 +229,6 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
                     content: " Total de RAM usada: Erro, nenhuma resposta de " + $scope.ip
                 });
             }
-
-
         }, function (erro) {
         });
     }
@@ -274,7 +271,6 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
                     content: " Total de RAM disponível : Erro, nenhuma resposta de " + $scope.ip
                 });
             }
-
         }, function (erro) {
         });
     }
@@ -292,7 +288,6 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
         angular.forEach($scope.cpuSelectedOptions, function (value) {
             value !== 'Nenhum' && $scope.cpuOptions[parseInt(value)].fn && $scope.cpuOptions[parseInt(value)].fn();
         });
-
     }
 
 });
