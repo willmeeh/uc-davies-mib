@@ -37,7 +37,8 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">CPU</label>
                                         <select multiple="" class="form-control" ng-model="cpuSelectedOptions">
-                                            <option>Trocas de contexto(contador)</option>
+                                            <option>Nenhum</option>
+                                            <option ng-repeat="value in cpuOptions" value="{{$index}}">{{value.label}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -45,24 +46,25 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Memória</label>
                                         <select multiple="" class="form-control" ng-model="memorySelectedOptions">
-                                            <option ng-repeat="value in memoryOptions" value="{{$index}}" >{{value.label}}</option>
+                                            <option>Nenhum</option>
+                                            <option ng-repeat="value in memoryOptions" value="{{$index}}">{{value.label}}</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Processos</label>
                                         <select multiple="" class="form-control" ng-model="taskSelectedOptions">
-                                            <option>Tabela de processos</option>
-                                            <option>Quantidade de processos</option>
+                                            <option ng-repeat="value in tasksOptions" value="{{$index}}" >{{value.label}}</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Disco</label>
                                         <select multiple="" class="form-control" ng-model="diskSelectedOptions">
-                                            <option ng-repeat="value in diskOptions" value="{{$index}}" >{{value.label}}</option>
+                                            <option>Nenhum</option>
+                                            <option ng-repeat="value in diskOptions" value="{{$index}}">{{value.label}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -86,7 +88,7 @@
                         </div>
                     </div>
                     <div style="overflow: auto;height: 70vh">
-                        <ul class="list-group" >
+                        <ul class="list-group">
                             <li class="list-group-item " ng-repeat="value in retornoList | orderBy:'time':true">
                                 <b>[{{value.time}}]</b>{{value.content}}
                             </li>

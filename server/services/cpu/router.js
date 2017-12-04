@@ -3,6 +3,6 @@ const cpuController = require('./controller');
 
 const cpuRouter = express.Router();
 
-cpuRouter.route('/getUsage/:ip').get(cpuController.getUsage);
+cpuRouter.route('/getContextCounter/:ip').get(cpuController.getContextCounter);
 
 module.exports = { cpuRouter };

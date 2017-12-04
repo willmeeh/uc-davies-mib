@@ -3,6 +3,6 @@ const tasksController = require('./controller');
 
 const tasksRouter = express.Router();
 
-tasksRouter.route('/getUsage/:ip').get(tasksController.getUsage);
+tasksRouter.route('/getTotal/:ip').get(tasksController.getTotal);
 
 module.exports = { tasksRouter };

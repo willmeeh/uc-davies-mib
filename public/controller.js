@@ -6,10 +6,10 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
 
     var baseUrl = 'http://localhost:3000';
 
-    $scope.init = function() {
+    $scope.init = function () {
         $scope.ip = "localhost";
         $scope.retornoList = [];
-    
+
         $scope.memorySelectedOptions = [];
         $scope.taskSelectedOptions = [];
         $scope.diskSelectedOptions = [];
@@ -39,6 +39,19 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
             label: 'Porcentagem de inodes utilizado',
             fn: $scope.pushInodesDisk
         }];
+
+        $scope.tasksOptions = [{
+            label: 'Tabela de processos',
+            fn: $scope.pushFreeDisk
+        }, {
+            label: 'Quantidade de processos',
+            fn: $scope.pushTotalTasks
+        }];
+
+        $scope.cpuOptions = [{
+            label: 'Trocas de contexto(Contador)',
+            fn: $scope.pushContextCounterTasks
+        }];
     }
 
     $scope.bytesToSize = function (size) {
@@ -46,8 +59,23 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
         return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
     };
 
-    $scope.limparRetornos = function() {
+    $scope.limparRetornos = function () {
         $scope.retornoList = [];
+    }
+
+
+    $scope.pushContextCounterTasks = function () {
+        $http({
+            method: 'GET',
+            url: baseUrl + '/cpu/getContextCounter/' + $scope.ip
+        }).then(function (retorno) {
+            $scope.retornoList.push({
+                time: moment().format('LTS'),
+                content: ' Trocas de contexto: ' + retorno.data.value + " (Counter32)"
+            })
+        }, function (erro) {
+            console.log('erro');
+        });
     }
 
     $scope.pushFreeDisk = function () {
@@ -56,14 +84,30 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
             url: baseUrl + '/disk/getFree/' + $scope.ip
         }).then(function (retorno) {
             var espacoLivre = 0;
-            angular.forEach(retorno.data, function(retornoOid) {
+            angular.forEach(retorno.data, function (retornoOid) {
                 espacoLivre += retornoOid.value;
             });
 
-            $scope.retornoList.push({
+            var obj = {
                 time: moment().format('LTS'),
                 content: ' Espaço livre: ' + $scope.bytesToSize(espacoLivre * 1024)
-            })
+            }
+            
+            $http({
+                method: 'GET',
+                url: baseUrl + '/disk/getUsagePercent/' + $scope.ip
+            }).then(function (retorno) {
+                var porcentagemEspacoLivre = 0;
+                angular.forEach(retorno.data, function(valor) {
+                    porcentagemEspacoLivre += valor.value;
+                })
+                obj.content += " | " + (100 - porcentagemEspacoLivre) + " %"
+                $scope.retornoList.push(obj)
+            }, function (erro) {
+                $scope.retornoList.push(obj)
+            });
+
+            
         }, function (erro) {
         });
     }
@@ -74,14 +118,30 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
             url: baseUrl + '/disk/getUsage/' + $scope.ip
         }).then(function (retorno) {
             var espacoUsado = 0;
-            angular.forEach(retorno.data, function(retornoOid) {
+            angular.forEach(retorno.data, function (retornoOid) {
                 espacoUsado += retornoOid.value;
             });
-            $scope.retornoList.push({
+
+            var obj = {
                 time: moment().format('LTS'),
                 content: ' Espaço usado: ' + $scope.bytesToSize(espacoUsado * 1024)
-            })
+            }
+
+            $http({
+                method: 'GET',
+                url: baseUrl + '/disk/getUsagePercent/' + $scope.ip
+            }).then(function (retorno) {
+                var porcentagemEspacoUsado = 0;
+                angular.forEach(retorno.data, function(valor) {
+                    porcentagemEspacoUsado += valor.value;
+                })
+                obj.content += " | " + porcentagemEspacoUsado + " %"
+                $scope.retornoList.push(obj)
+            }, function (erro) {
+                $scope.retornoList.push(obj)
+            });
         }, function (erro) {
+            $scope.retornoList.push(obj)
         });
     }
 
@@ -91,7 +151,7 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
             url: baseUrl + '/disk/getTotal/' + $scope.ip
         }).then(function (retorno) {
             var espacoTotal = 0;
-            angular.forEach(retorno.data, function(retornoOid) {
+            angular.forEach(retorno.data, function (retornoOid) {
                 espacoTotal += retornoOid.value;
             });
             $scope.retornoList.push({
@@ -154,13 +214,20 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
         });
     }
 
-    $scope.searchMibs = function() {
+    $scope.searchMibs = function () {
         angular.forEach($scope.memorySelectedOptions, function (value) {
-            $scope.memoryOptions[parseInt(value)].fn && $scope.memoryOptions[parseInt(value)].fn();
+            value !== 'Nenhum' && $scope.memoryOptions[parseInt(value)].fn && $scope.memoryOptions[parseInt(value)].fn();
         });
         angular.forEach($scope.diskSelectedOptions, function (value) {
-            $scope.diskOptions[parseInt(value)].fn && $scope.diskOptions[parseInt(value)].fn();
+            value !== 'Nenhum' && $scope.diskOptions[parseInt(value)].fn && $scope.diskOptions[parseInt(value)].fn();
         });
+        angular.forEach($scope.taskSelectedOptions, function (value) {
+            value !== 'Nenhum' && $scope.tasksOptions[parseInt(value)].fn && $scope.tasksOptions[parseInt(value)].fn();
+        });
+        angular.forEach($scope.cpuSelectedOptions, function (value) {
+            value !== 'Nenhum' && $scope.cpuOptions[parseInt(value)].fn && $scope.cpuOptions[parseInt(value)].fn();
+        });
+        
     }
 
 });
