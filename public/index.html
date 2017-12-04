@@ -84,12 +84,12 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5>Retorno:</h5>
+                            <h3>Retorno:</h3>
                         </div>
                     </div>
                     <div style="overflow: auto;height: 70vh">
                         <ul class="list-group">
-                            <li class="list-group-item " ng-repeat="value in retornoList | orderBy:'time':true">
+                            <li class="list-group-item " ng-repeat="value in retornoList | orderBy:'time':true" ng-style="{'color': (value.isError ? 'red' : '#333')}">
                                 <b>[{{value.time}}]</b>{{value.content}}
                             </li>
                         </ul>

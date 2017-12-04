@@ -17,6 +17,7 @@
 # snmpd.conf:
 
 rocommunity public
+
 rwcommunity private
 
 includeAllDisks 10%
