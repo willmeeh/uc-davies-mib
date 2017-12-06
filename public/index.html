@@ -31,9 +31,9 @@
                         <div class="col-md-12">
                             <h5 class="mtop-20">Sobre o que você deseja saber? </h5>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">CPU</label>
                                         <select multiple="" class="form-control" ng-model="cpuSelectedOptions">
@@ -42,7 +42,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Memória</label>
                                         <select multiple="" class="form-control" ng-model="memorySelectedOptions">
@@ -59,26 +59,33 @@
                                         </select>
                                     </div>
                                 </div> -->
-                                <div class="col-md-6">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect2">Disco</label>
-                                        <select multiple="" class="form-control" ng-model="diskSelectedOptions">
+                                        <select multiple="" class="form-control" ng-model="diskSelectedOptions" style="height: 204px;">
                                             <option>Nenhum</option>
                                             <option ng-repeat="value in diskOptions" value="{{$index}}">{{value.label}}</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-12 text-right">
-                                    <button type="button" style="width: 25%" class="btn btn-secondary" ng-click="searchMibs();">
+                                <div class="col-md-6" style="padding-right: 5px;">
+                                    <button type="button" style="width: 100%" class="btn btn-secondary" ng-click="searchMibs();">
                                         Buscar
                                     </button>
-                                    <button type="button" style="width: 25%" class="btn btn-secondary" ng-click="limparRetornos();">
+
+                                </div>
+                                <div class="col-md-6" style="padding-left: 5px;">
+                                    <button type="button" style="width: 100%" class="btn btn-secondary" ng-click="limparRetornos();">
                                         Limpar
                                     </button>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-md-6">

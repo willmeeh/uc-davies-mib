@@ -78,7 +78,7 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
                 $scope.retornoList.push({
                     isError: true,
                     time: moment().format('LTS'),
-                    content: " Espaço livre: Erro nenhuma resposta de  " + $scope.ip
+                    content: " Espaço livre: Erro, nenhuma resposta de  " + $scope.ip
                 });
             }
         }, function (erro) {
@@ -118,7 +118,7 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
                 $scope.retornoList.push({
                     isError: true,
                     time: moment().format('LTS'),
-                    content: " Espaço livre: Erro nenhuma resposta de  " + $scope.ip
+                    content: " Espaço livre: Erro, nenhuma resposta de  " + $scope.ip
                 });
             }
         }, function (erro) {
@@ -158,7 +158,7 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
                 $scope.retornoList.push({
                     isError: true,
                     time: moment().format('LTS'),
-                    content: " Espaço usado: Erro nenhuma resposta de  " + $scope.ip
+                    content: " Espaço usado: Erro, nenhuma resposta de  " + $scope.ip
                 });
             }
         }, function (erro) {
@@ -184,7 +184,7 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
                 $scope.retornoList.push({
                     isError: true,
                     time: moment().format('LTS'),
-                    content: " Espaço total: Erro nenhuma resposta de  " + $scope.ip
+                    content: " Espaço total: Erro, nenhuma resposta de  " + $scope.ip
                 });
             }
         }, function (erro) {
@@ -205,7 +205,7 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
                 $scope.retornoList.push({
                     isError: true,
                     time: moment().format('LTS'),
-                    content: " Porcentagem de inodes utilizado: Erro nenhuma resposta de " + $scope.ip
+                    content: " Porcentagem de inodes utilizado: Erro, nenhuma resposta de " + $scope.ip
                 });
             }
         }, function (erro) {
@@ -247,7 +247,7 @@ app.controller('controller', function ($scope, $http, $httpParamSerializer, $win
                 $scope.retornoList.push({
                     isError: true,
                     time: moment().format('LTS'),
-                    content: " Total de RAM: Erro nenhuma resposta de " + $scope.ip
+                    content: " Total de RAM: Erro, nenhuma resposta de " + $scope.ip
                 });
             }
         }, function (erro) {
