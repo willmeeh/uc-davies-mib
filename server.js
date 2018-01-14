@@ -14,9 +14,8 @@ app.use('/disk', diskRouter);
 app.use('/cpu', cpuRouter);
 app.use('/tasks', tasksRouter);
 
-
 app.listen(3000, () => {
-    console.log(`Server listen on port 3000`);
+    console.log(`Access > localhost:3000`);
 });
 
     

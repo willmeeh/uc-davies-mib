@@ -1,3 +1,10 @@
+# Uc Davis MIB
+
+Uma API desenvolvida em Node.js, e um client desenvolvido em Angularjs para monitorar o estado de uma máquina utilizando o protocolo SNMP com a MIB(managment information base) da UC Davis.
+
+# Interface:
+
+![image alt text](screen.png)
 
 # OIDS Utilizados:
 
@@ -16,13 +23,13 @@
 
 # snmpd.conf:
 
-rocommunity public
+    rocommunity public
+    
+    rwcommunity private
+    
+    includeAllDisks 10%
 
-rwcommunity private
 
-includeAllDisks 10%
-
-
-# sites para visualizar uc-davis-mibs
+# site para visualizar uc-davis-mibs
 http://www.oidview.com/mibs/2021/UCD-SNMP-MIB.html
 

@@ -1,41 +1,22 @@
 {
-  "name": "node-express-mongoose-boilerplate",
   "version": "1.0.0",
-  "description": "This is an boilerplate to node with express and mongoose ",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/willmeeh/node-express-mongoose-boilerplate.git"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server"
   },
   "keywords": [
     "node-express-mongoose-boilerplate"
   ],
   "author": "William Mehler",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/willmeeh/node-express-mongoose-boilerplate/issues"
-  },
-  "homepage": "https://github.com/willmeeh/node-express-mongoose-boilerplate#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
-    "jsonwebtoken": "^7.4.2",
     "lodash": "^4.17.4",
-    "mongodb": "^2.2.31",
-    "mongoose": "^4.11.7",
     "net-snmp": "^1.2.0",
     "request": "^2.81.0",
     "snmp-native": "^1.1.1",
     "validator": "^8.0.0"
-  },
-  "devDependencies": {
-    "expect": "^1.20.2",
-    "mocha": "^3.5.0",
-    "nodemon": "^1.12.1",
-    "supertest": "^3.0.0"
   }
 }
