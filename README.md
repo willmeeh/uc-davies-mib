@@ -1,6 +1,6 @@
 # Uc Davis MIB
 
-Uma API desenvolvida em Node.js, e um client desenvolvido em Angularjs para monitorar o estado de uma máquina utilizando o protocolo SNMP com a MIB(managment information base) da UC Davis.
+Uma API desenvolvida em Node.js, e um client desenvolvido em Angularjs para monitorar o estado de uma máquina utilizando o protocolo SNMP com a MIB(managment information base) da UC Davis. Este projeto foi dedicado à disciplina de Gerência e Administração de Redes (UNISC).
 
 # Interface:
 
